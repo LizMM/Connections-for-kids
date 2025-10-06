@@ -684,12 +684,16 @@
     }
 
     function startGame(difficulty) {
+      console.log('Starting game with difficulty:', difficulty);
       currentDifficulty = difficulty;
       currentPuzzles = puzzlesByDifficulty[difficulty];
+      console.log('Current puzzles:', currentPuzzles);
       currentPuzzleIndex = 0;
       showScreen('gameScreen');
+      console.log('Screen switched to gameScreen');
       // Use setTimeout to ensure screen is rendered before initializing game
       setTimeout(() => {
+        console.log('Calling restart...');
         restart();
       }, 50);
     }
@@ -886,16 +890,20 @@
     }
 
     // Event listeners
-    document.getElementById('easyBtn').onclick = () => startGame('easy');
-    document.getElementById('mediumBtn').onclick = () => startGame('medium');
-    document.getElementById('hardBtn').onclick = () => startGame('hard');
-    document.getElementById('checkBtn').onclick = checkGroup;
-    document.getElementById('shuffleBtn').onclick = shuffleCards;
-    document.getElementById('restartBtn').onclick = restart;
-    document.getElementById('prevBtn').onclick = () => changePuzzle(-1);
-    document.getElementById('nextBtn').onclick = () => changePuzzle(1);
-    document.getElementById('soundToggle').onclick = toggleSound;
-    document.getElementById('homeBtn').onclick = goHome;
+    window.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('easyBtn').addEventListener('click', () => startGame('easy'));
+      document.getElementById('mediumBtn').addEventListener('click', () => startGame('medium'));
+      document.getElementById('hardBtn').addEventListener('click', () => startGame('hard'));
+      document.getElementById('checkBtn').addEventListener('click', checkGroup);
+      document.getElementById('shuffleBtn').addEventListener('click', shuffleCards);
+      document.getElementById('restartBtn').addEventListener('click', restart);
+      document.getElementById('prevBtn').addEventListener('click', () => changePuzzle(-1));
+      document.getElementById('nextBtn').addEventListener('click', () => changePuzzle(1));
+      document.getElementById('soundToggle').addEventListener('click', toggleSound);
+      document.getElementById('homeBtn').addEventListener('click', goHome);
+      
+      console.log('Game initialized!');
+    });
 
     // Keyboard support
     document.addEventListener('keydown', (e) => {

@@ -432,13 +432,13 @@
   <div id="homeScreen" class="screen home-screen active">
     <h1 class="home-title">Kids Connections</h1>
     <div class="difficulty-buttons">
-      <button class="difficulty-btn easy" onclick="startGame('easy')">
+      <button class="difficulty-btn easy" id="easyBtn">
         😊 Easy
       </button>
-      <button class="difficulty-btn medium" onclick="startGame('medium')">
+      <button class="difficulty-btn medium" id="mediumBtn">
         🤔 Medium
       </button>
-      <button class="difficulty-btn hard" onclick="startGame('hard')">
+      <button class="difficulty-btn hard" id="hardBtn">
         🤯 Hard
       </button>
     </div>
@@ -688,7 +688,10 @@
       currentPuzzles = puzzlesByDifficulty[difficulty];
       currentPuzzleIndex = 0;
       showScreen('gameScreen');
-      restart();
+      // Use setTimeout to ensure screen is rendered before initializing game
+      setTimeout(() => {
+        restart();
+      }, 50);
     }
 
     function goHome() {
@@ -883,6 +886,9 @@
     }
 
     // Event listeners
+    document.getElementById('easyBtn').onclick = () => startGame('easy');
+    document.getElementById('mediumBtn').onclick = () => startGame('medium');
+    document.getElementById('hardBtn').onclick = () => startGame('hard');
     document.getElementById('checkBtn').onclick = checkGroup;
     document.getElementById('shuffleBtn').onclick = shuffleCards;
     document.getElementById('restartBtn').onclick = restart;

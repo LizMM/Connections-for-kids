@@ -28,24 +28,24 @@
       height: 100vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      position: absolute;
-      top: 0;
-      left: 0;
     }
     
     .screen.active { 
-      display: block;
-      position: relative;
+      display: flex;
+      flex-direction: column;
     }
     
     /* HOME SCREEN */
     .home-screen {
-      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 20px;
       text-align: center;
+    }
+    
+    .home-screen.active {
+      display: flex;
     }
     
     .home-title {
@@ -686,8 +686,17 @@
 
     // Screen management
     function showScreen(screenId) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      console.log('Showing screen:', screenId);
+      
+      // Hide ALL screens
+      document.getElementById('homeScreen').classList.remove('active');
+      document.getElementById('gameScreen').classList.remove('active');
+      
+      // Show only the target screen
       document.getElementById(screenId).classList.add('active');
+      
+      console.log('Home screen classes:', document.getElementById('homeScreen').className);
+      console.log('Game screen classes:', document.getElementById('gameScreen').className);
     }
 
     function startGame(difficulty) {
